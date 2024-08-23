@@ -14,4 +14,34 @@
                         
 原文链接：https://blog.csdn.net/2303_80025768/article/details/138042952
 1. ![alt text](image-4.png)
-2. 
+
+5. hashmap中的getOrdefault方法，如果key不存在，则返回默认值；
+对应位置[leetcode 242](https://leetcode.cn/problems/valid-anagram/)
+对应代码
+```java
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        else{
+            int n = s.length();
+            Map<Character, Integer> table = new HashMap<Character,Integer>();
+            for(int i=0;i<n;i++){
+                char ch = s.charAt(i);
+                table.put(ch, table.getOrDefault(ch,0)+1);
+            }
+            for(int i=0;i<n;i++){
+                char ch = t.charAt(i);
+                table.put(ch, table.getOrDefault(ch,0)-1);
+                if(table.get(ch)<0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+```
+对应相似题目[leetcode 383](https://leetcode.cn/problems/ransom-note/description/)
